@@ -1,8 +1,23 @@
 <template>
-  <b-container>
+  <b-container fluid>
     <b-row>
       <b-col>
-        <b-table head-variant="dark" show-empty :fields="fields"></b-table>
+        <b-table
+          head-variant="dark"
+          fixed
+          show-empty
+          :fields="fields"
+          :items="items"
+        >
+          <template v-slot:cell(actions)>
+            <div class="d-flex justify-content-around">
+              <b-button size="sm" variant="outline-dark">Sell </b-button>
+              <b-button size="sm" variant="outline-dark"
+                >View results
+              </b-button>
+            </div>
+          </template>
+        </b-table>
       </b-col>
     </b-row>
   </b-container>
@@ -10,10 +25,23 @@
 
 <script>
 export default {
-  name: "Analysis",
   data() {
     return {
-      fields: ["Name", "Description", "State", ""]
+      fields: [
+        "name",
+        "description",
+        "state",
+        "listed on marketplace",
+        { key: "actions", label: "" }
+      ],
+      items: [
+        {
+          name: "Aisha",
+          description: "Watts",
+          state: "active",
+          "listed on marketplace": "yes"
+        }
+      ]
     };
   }
 };

@@ -67,6 +67,30 @@ const routes = [
     name: "purchase-tokens",
     meta: { layout: "dashboard" },
     component: () => import("@/views/Purchase-tokens.vue")
+  },
+  {
+    path: "/create-drt",
+    name: "create-drt",
+    meta: { layout: "dashboard" },
+    component: () => import("@/views/Create-drt.vue")
+  },
+  {
+    path: "/create-pool",
+    name: "create-pool",
+    meta: { layout: "dashboard" },
+    component: () => import("@/views/Create-pool.vue")
+  },
+  {
+    path: "/join-pool",
+    name: "join-pool",
+    meta: { layout: "dashboard" },
+    component: () => import("@/views/Join-pool.vue")
+  },
+  {
+    path: "/upload-data",
+    name: "upload-data",
+    meta: { layout: "dashboard" },
+    component: () => import("@/views/Upload-data.vue")
   }
 ];
 

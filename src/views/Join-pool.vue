@@ -10,11 +10,7 @@
           :items="items"
         >
           <template v-slot:cell(actions)>
-            <div class="d-flex justify-content-around">
-              <b-button size="sm" variant="outline-dark">Details </b-button>
-              <b-button size="sm" variant="outline-dark">Details </b-button>
-              <b-button size="sm" variant="outline-dark">Details </b-button>
-            </div>
+            <b-button size="sm" variant="outline-dark">Join Pool </b-button>
           </template>
         </b-table>
       </b-col>
@@ -29,16 +25,14 @@ export default {
       fields: [
         "name",
         "description",
-        "state",
-        "listed on marketplace",
+        "digital rights",
         { key: "actions", label: "" }
       ],
       items: [
         {
           name: "Aisha",
           description: "Watts",
-          state: "active",
-          "listed on marketplace": "yes"
+          "digital rights": "Lorem"
         }
       ]
     };

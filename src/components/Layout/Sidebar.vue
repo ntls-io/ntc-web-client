@@ -68,22 +68,22 @@ export default {
       },
       {
         name: "Upload data",
-        path: "/",
+        path: "/upload-data",
         icon: "cloud-upload"
       },
       {
         name: "Create Pool",
-        path: "/",
+        path: "/create-pool",
         icon: "columns"
       },
       {
         name: "Join Pool",
-        path: "/",
+        path: "/join-pool",
         icon: "arrow-right-square"
       },
       {
         name: "Create Digital Right",
-        path: "/",
+        path: "/create-drt",
         icon: "file-lock"
       },
       {
