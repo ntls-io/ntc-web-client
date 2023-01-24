@@ -2,7 +2,7 @@
   <footer>
     <div class="text-center small">
       <div>
-        Copyright © 2020. xyz (PTY) Ltd. All rights reserved.
+        Copyright © {{ year }}. <b>Nautilus (Pty) Ltd.</b> All rights reserved.
       </div>
       <a class="font-weight-bold" href="#">Privacy </a>
       <span class="font-weight-lighter">and </span>
@@ -10,6 +10,16 @@
     </div>
   </footer>
 </template>
+
+<script>
+export default {
+  computed: {
+    year() {
+      return new Date().getFullYear();
+    }
+  }
+};
+</script>
 
 <style lang="scss" scoped>
 a {

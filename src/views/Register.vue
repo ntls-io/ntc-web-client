@@ -1,15 +1,21 @@
 <template>
   <b-container fluid>
     <b-row class="h-100 justify-content-center">
-      <b-col sm="7" md="6" lg="4">
-        <b-card>
+      <b-col sm="6" md="5" lg="4" xl="3">
+        <b-card class="border-0" footer-bg-variant="white">
+          <div class="mb-4 text-center">
+            <b-img
+              class="img-fluid text-center"
+              src="@/assets/img/logo.png"
+              width="200"
+            ></b-img>
+            <h3 class="mb-3 font-weight-bolder">Create Account</h3>
+          </div>
           <b-form
             class="form-signin text-center"
             @submit.prevent="register"
             :validated="isValid"
           >
-            <h3 class="mb-3 font-weight-bolder">Create Account</h3>
-
             <b-form-group>
               <b-form-input
                 trim
