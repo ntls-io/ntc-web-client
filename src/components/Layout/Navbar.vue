@@ -1,21 +1,21 @@
 <template>
   <nav class="main-header navbar navbar-expand navbar-light border-0">
     <!-- Left navbar links -->
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a
-          class="nav-link"
+    <b-nav class="navbar-nav">
+      <b-nav-item>
+        <b-link
+          class="text-dark"
           data-widget="pushmenu"
           href="#"
           role="button"
           @click="toggle()"
         >
           <b-icon icon="layout-sidebar"></b-icon
-        ></a>
-      </li>
-    </ul>
+        ></b-link>
+      </b-nav-item>
+    </b-nav>
 
-    <ul class="navbar-nav ml-auto">
+    <b-nav class="navbar-nav ml-auto">
       <b-nav-item-dropdown text="Full Name" toggle-class="text-dark ">
         <b-dropdown-item>
           Profile
@@ -24,7 +24,7 @@
           Logout
         </b-dropdown-item>
       </b-nav-item-dropdown>
-    </ul>
+    </b-nav>
   </nav>
 </template>
 
