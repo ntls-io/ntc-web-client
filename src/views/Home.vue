@@ -21,12 +21,12 @@
           </b-list-group-item>
 
           <b-list-group-item class="d-flex justify-content-between ">
-            DTRs Sold
+            Digital Rights Tokens Sold
             <span>3</span>
           </b-list-group-item>
 
           <b-list-group-item class="d-flex justify-content-between">
-            DTRs Purchased
+            Digital Rights Tokens Purchased
             <span>1</span>
           </b-list-group-item>
           <b-list-group-item class="d-flex justify-content-between">

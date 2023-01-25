@@ -63,7 +63,7 @@ export default {
         icon: "house"
       },
       {
-        name: "Vault Actions",
+        name: "Actions",
         separator: true
       },
       {
