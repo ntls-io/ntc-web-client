@@ -91,6 +91,18 @@ const routes = [
     name: "upload-data",
     meta: { layout: "dashboard" },
     component: () => import("@/views/Upload-data.vue")
+  },
+  {
+    path: "/pools",
+    name: "pools",
+    meta: { layout: "dashboard" },
+    component: () => import("@/views/Pools.vue")
+  },
+  {
+    path: "/tokens",
+    name: "tokens",
+    meta: { layout: "dashboard" },
+    component: () => import("@/views/Tokens.vue")
   }
 ];
 
