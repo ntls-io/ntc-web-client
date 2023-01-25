@@ -2,8 +2,13 @@
   <b-container fluid>
     <b-row>
       <b-col sm="4">
-        <b-card title="Create Pool">
-          <form-wizard color="#000" step-size="xs" title=" " subtitle=" ">
+        <b-card no-body>
+          <form-wizard
+            color="#000"
+            step-size="xs"
+            title="Create Pool"
+            subtitle=" "
+          >
             <tab-content title=" ">
               <b-form>
                 <b-form-group label="Select Schema Definition">
