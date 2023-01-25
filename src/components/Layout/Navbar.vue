@@ -20,7 +20,7 @@
         <b-dropdown-item>
           Profile
         </b-dropdown-item>
-        <b-dropdown-item href="#">
+        <b-dropdown-item to="/">
           Logout
         </b-dropdown-item>
       </b-nav-item-dropdown>

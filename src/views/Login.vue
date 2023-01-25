@@ -26,7 +26,7 @@
                 placeholder="Password"
               ></b-form-input>
             </b-form-group>
-            <b-button block type="submit">
+            <b-button block to="/home">
               SIGN IN
             </b-button>
           </form>
