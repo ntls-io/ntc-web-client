@@ -1,9 +1,12 @@
 <template>
   <aside class="main-sidebar sidebar-light-dark border-right">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
-      LOGO
-    </a>
+    <span class="brand-link">
+      <b-img src="@/assets/img/logo.png" class="brand-image"></b-img>
+      <span class="brand-text font-weight-light font-weight-bold">
+        NAUTILUS
+      </span>
+    </span>
 
     <!-- Sidebar -->
     <div class="sidebar">
@@ -72,58 +75,11 @@ export default {
         path: "/tokens",
         icon: "files"
       },
-      // {
-      //   name: "Actions",
-      //   separator: true
-      // },
-      // {
-      //   name: "Upload data",
-      //   path: "/upload-data",
-      //   icon: "cloud-upload"
-      // },
-      // {
-      //   name: "Create Pool",
-      //   path: "/create-pool",
-      //   icon: "columns"
-      // },
-      // {
-      //   name: "Join Pool",
-      //   path: "/join-pool",
-      //   icon: "arrow-right-square"
-      // },
-      // {
-      //   name: "Create Digital Right",
-      //   path: "/create-drt",
-      //   icon: "file-lock"
-      // },
-      // {
-      //   name: "Tokens",
-      //   separator: true
-      // },
-      // {
-      //   name: "Manage Tokens",
-      //   path: "/manage-tokens",
-      //   icon: "files"
-      // },
-      // {
-      //   name: "Purchase Tokens",
-      //   path: "/purchase-tokens",
-      //   icon: "cart3"
-      // },
       {
-        name: "Manage Data",
-        separator: true
-      },
-      {
-        name: "Manage Packages",
-        path: "/manage-packages",
+        name: "Packages",
+        path: "/packages",
         icon: "inboxes"
       },
-      // {
-      //   name: "Manage Pools",
-      //   path: "/manage-pools",
-      //   icon: "columns-gap"
-      // },
       {
         name: "Analysis",
         path: "/analysis",

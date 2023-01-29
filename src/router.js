@@ -33,64 +33,10 @@ const routes = [
     component: () => import("@/views/Analysis-data.vue")
   },
   {
-    path: "/digital-tokens",
-    name: "digital-tokens",
+    path: "/packages",
+    name: "packages",
     meta: { layout: "dashboard" },
-    component: () => import("@/views/Digital-tokens.vue")
-  },
-  {
-    path: "/contributor-tokens",
-    name: "contributor-tokens",
-    meta: { layout: "dashboard" },
-    component: () => import("@/views/Contributor-tokens.vue")
-  },
-  {
-    path: "/manage-packages",
-    name: "manage-packages",
-    meta: { layout: "dashboard" },
-    component: () => import("@/views/Manage-packages.vue")
-  },
-  {
-    path: "/manage-pools",
-    name: "manage-pools",
-    meta: { layout: "dashboard" },
-    component: () => import("@/views/Manage-pools.vue")
-  },
-  {
-    path: "/manage-tokens",
-    name: "manage-tokens",
-    meta: { layout: "dashboard" },
-    component: () => import("@/views/Manage-tokens.vue")
-  },
-  {
-    path: "/purchase-tokens",
-    name: "purchase-tokens",
-    meta: { layout: "dashboard" },
-    component: () => import("@/views/Purchase-tokens.vue")
-  },
-  {
-    path: "/create-drt",
-    name: "create-drt",
-    meta: { layout: "dashboard" },
-    component: () => import("@/views/Create-drt.vue")
-  },
-  {
-    path: "/create-pool",
-    name: "create-pool",
-    meta: { layout: "dashboard" },
-    component: () => import("@/views/Create-pool.vue")
-  },
-  {
-    path: "/join-pool",
-    name: "join-pool",
-    meta: { layout: "dashboard" },
-    component: () => import("@/views/Join-pool.vue")
-  },
-  {
-    path: "/upload-data",
-    name: "upload-data",
-    meta: { layout: "dashboard" },
-    component: () => import("@/views/Upload-data.vue")
+    component: () => import("@/views/Packages.vue")
   },
   {
     path: "/pools",
@@ -103,6 +49,12 @@ const routes = [
     name: "tokens",
     meta: { layout: "dashboard" },
     component: () => import("@/views/Tokens.vue")
+  },
+  {
+    path: "/account",
+    name: "account",
+    meta: { layout: "dashboard" },
+    component: () => import("@/views/Account.vue")
   }
 ];
 

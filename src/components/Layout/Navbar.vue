@@ -17,7 +17,7 @@
 
     <b-nav class="navbar-nav ml-auto">
       <b-nav-item-dropdown text="Full Name" toggle-class="text-dark ">
-        <b-dropdown-item>
+        <b-dropdown-item to="/account">
           Profile
         </b-dropdown-item>
         <b-dropdown-item to="/">
