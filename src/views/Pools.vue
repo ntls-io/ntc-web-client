@@ -1,7 +1,7 @@
 <template>
   <b-container fluid>
     <b-row>
-      <b-col md="4">
+      <b-col md="4" lg="3">
         <b-card no-body>
           <form-wizard
             color="#000"
@@ -12,7 +12,13 @@
             <tab-content title=" ">
               <b-form>
                 <b-form-group label="Select Schema Definition">
-                  <b-form-select></b-form-select>
+                  <b-form-select :options="schemas" v-model="schema">
+                    <template #first>
+                      <b-form-select-option :value="null" disabled
+                        >Please select an option
+                      </b-form-select-option>
+                    </template>
+                  </b-form-select>
                 </b-form-group>
                 <b-form-group label="Select Data File">
                   <FilePicker pickerId="poolDataFile" />
@@ -81,10 +87,9 @@
           <b-table
             head-variant="dark"
             borderless
-            fixed
             show-empty
             :fields="fields"
-            :items="items"
+            :items="pools"
           >
             <template v-slot:cell(actions)>
               <b-button size="sm" variant="outline-dark">Join Pool </b-button>
@@ -108,17 +113,39 @@ export default {
       fields: [
         "name",
         "description",
-        "digital rights",
+        "digital_rights",
         { key: "actions", label: "" }
       ],
-      items: [
-        {
-          name: "Aisha",
-          description: "Watts",
-          "digital rights": "Lorem"
-        }
-      ]
+      pools: [],
+      schema: null,
+      schemas: []
     };
+  },
+  mounted() {
+    this.getPools();
+    this.getSchemas();
+  },
+  methods: {
+    getPools() {
+      this.axios
+        .get("https://63e4d8148e1ed4ccf6e75d6c.mockapi.io/pools")
+        .then(response => {
+          this.pools = response.data;
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    },
+    getSchemas() {
+      this.axios
+        .get("https://63e4d8148e1ed4ccf6e75d6c.mockapi.io/schemas")
+        .then(response => {
+          this.schemas = response.data;
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    }
   }
 };
 </script>
