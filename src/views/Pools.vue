@@ -1,7 +1,7 @@
 <template>
   <b-container fluid>
     <b-row>
-      <b-col sm="4">
+      <b-col md="4">
         <b-card no-body>
           <form-wizard
             color="#000"
@@ -15,7 +15,7 @@
                   <b-form-select></b-form-select>
                 </b-form-group>
                 <b-form-group label="Select Data File">
-                  <b-form-select></b-form-select>
+                  <FilePicker pickerId="poolDataFile" />
                 </b-form-group>
                 <b-form-group label="Select Wallet">
                   <b-form-select></b-form-select>
@@ -97,7 +97,12 @@
 </template>
 
 <script>
+import FilePicker from "@/components/FilePicker";
+
 export default {
+  components: {
+    FilePicker
+  },
   data() {
     return {
       fields: [
