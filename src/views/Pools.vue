@@ -12,13 +12,22 @@
             <tab-content title=" ">
               <b-form>
                 <b-form-group label="Select Schema Definition">
-                  <b-form-select :options="schemas" v-model="schema">
+                  <b-form-select
+                    :options="schemas"
+                    v-model="schema"
+                    value-field="id"
+                  >
                     <template #first>
                       <b-form-select-option :value="null" disabled
                         >Please select an option
                       </b-form-select-option>
                     </template>
                   </b-form-select>
+                </b-form-group>
+                <b-form-group v-if="schema !== null">
+                  <b-button block v-b-modal.schema-preview
+                    >Preview schema
+                  </b-button>
                 </b-form-group>
                 <b-form-group label="Select Data File">
                   <FilePicker pickerId="poolDataFile" />
@@ -87,10 +96,16 @@
           <b-table
             head-variant="dark"
             borderless
+            :busy.sync="isTableBusy"
             show-empty
             :fields="fields"
-            :items="pools"
+            :items="poolProvider"
           >
+            <template #table-busy>
+              <div class="text-center text-danger my-2">
+                <b-spinner class="align-middle" variant="dark"></b-spinner>
+              </div>
+            </template>
             <template v-slot:cell(actions)>
               <b-button size="sm" variant="outline-dark">Join Pool </b-button>
             </template>
@@ -98,18 +113,32 @@
         </b-card>
       </b-col>
     </b-row>
+
+    <b-modal
+      id="schema-preview"
+      title="Schema Preview"
+      size="xl"
+      centered
+      hide-footer
+    >
+      <SchemaPreview :schema="schemaTemplate" />
+    </b-modal>
   </b-container>
 </template>
 
 <script>
 import FilePicker from "@/components/FilePicker";
+import SchemaPreview from "@/components/SchemaPreview";
+import schemaTemplate from "@/data/patient_genotype_schema.json";
 
 export default {
   components: {
+    SchemaPreview,
     FilePicker
   },
   data() {
     return {
+      isTableBusy: false,
       fields: [
         "name",
         "description",
@@ -118,24 +147,14 @@ export default {
       ],
       pools: [],
       schema: null,
-      schemas: []
+      schemas: [],
+      schemaTemplate: schemaTemplate
     };
   },
   mounted() {
-    this.getPools();
     this.getSchemas();
   },
   methods: {
-    getPools() {
-      this.axios
-        .get("https://63e4d8148e1ed4ccf6e75d6c.mockapi.io/pools")
-        .then(response => {
-          this.pools = response.data;
-        })
-        .catch(error => {
-          console.log(error);
-        });
-    },
     getSchemas() {
       this.axios
         .get("https://63e4d8148e1ed4ccf6e75d6c.mockapi.io/schemas")
@@ -145,6 +164,19 @@ export default {
         .catch(error => {
           console.log(error);
         });
+    },
+    async poolProvider(ctx) {
+      this.isTableBusy = true;
+      try {
+        const response = await this.axios.get(
+          "https://63e4d8148e1ed4ccf6e75d6c.mockapi.io/pools"
+        );
+        this.isTableBusy = false;
+        return response.data;
+      } catch (error) {
+        this.isTableBusy = false;
+        return [];
+      }
     }
   }
 };
