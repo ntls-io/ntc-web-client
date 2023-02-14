@@ -9,8 +9,8 @@
       @click="selectFile"
       >Select file
     </b-button>
-    <b-card v-if="sFile.state">
-      <b-container fluid>
+    <b-card v-if="sFile.state" body-class="p-2" class="m-0">
+      <b-container fluid class="p-0">
         <b-row no-gutters>
           <b-col>
             {{ sFile.name }}

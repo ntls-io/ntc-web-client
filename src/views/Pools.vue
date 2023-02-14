@@ -12,25 +12,10 @@
             <tab-content title=" ">
               <b-form>
                 <b-form-group label="Select Schema Definition">
-                  <b-form-select
-                    :options="schemas"
-                    v-model="schema"
-                    value-field="id"
-                  >
-                    <template #first>
-                      <b-form-select-option :value="null" disabled
-                        >Please select an option
-                      </b-form-select-option>
-                    </template>
-                  </b-form-select>
-                </b-form-group>
-                <b-form-group v-if="schema !== null">
-                  <b-button block v-b-modal.schema-preview
-                    >Preview schema
-                  </b-button>
+                  <FilePicker pickerId="schema-file" />
                 </b-form-group>
                 <b-form-group label="Select Data File">
-                  <FilePicker pickerId="poolDataFile" />
+                  <FilePicker pickerId="pool-file" />
                 </b-form-group>
                 <b-form-group label="Select Wallet">
                   <b-form-select></b-form-select>
@@ -146,25 +131,10 @@ export default {
         { key: "actions", label: "" }
       ],
       pools: [],
-      schema: null,
-      schemas: [],
       schemaTemplate: schemaTemplate
     };
   },
-  mounted() {
-    this.getSchemas();
-  },
   methods: {
-    getSchemas() {
-      this.axios
-        .get("https://63e4d8148e1ed4ccf6e75d6c.mockapi.io/schemas")
-        .then(response => {
-          this.schemas = response.data;
-        })
-        .catch(error => {
-          console.log(error);
-        });
-    },
     async poolProvider(ctx) {
       this.isTableBusy = true;
       try {
