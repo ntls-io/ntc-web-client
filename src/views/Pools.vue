@@ -12,10 +12,32 @@
             <tab-content title=" ">
               <b-form>
                 <b-form-group label="Select Schema Definition">
-                  <FilePicker pickerId="schema-file" />
+                  <b-form-select
+                    :options="schemas"
+                    v-model="schema"
+                    value-field="id"
+                  >
+                    <template #first>
+                      <b-form-select-option :value="null" disabled
+                        >Please select an option
+                      </b-form-select-option>
+                      <b-form-select-option value="file"
+                        >Select file
+                      </b-form-select-option>
+                    </template>
+                  </b-form-select>
+                </b-form-group>
+                <b-form-group v-if="schema === 'file'">
+                  <FilePicker pickerId="schema-file" @schema-file="setSchema" />
+                </b-form-group>
+
+                <b-form-group v-if="showPreview">
+                  <b-button block v-b-modal.schema-preview
+                    >Preview schema
+                  </b-button>
                 </b-form-group>
                 <b-form-group label="Select Data File">
-                  <FilePicker pickerId="pool-file" />
+                  <FilePicker pickerId="pool-file" @pool-file="setData" />
                 </b-form-group>
                 <b-form-group label="Select Wallet">
                   <b-form-select></b-form-select>
@@ -131,10 +153,34 @@ export default {
         { key: "actions", label: "" }
       ],
       pools: [],
+      dataFile: null,
+      schema: null,
+      schemas: [],
       schemaTemplate: schemaTemplate
     };
   },
+  computed: {
+    showPreview() {
+      if (this.schema) {
+        return this.schema === "file" ? !!this.dataFile : true;
+      }
+      return false;
+    }
+  },
+  mounted() {
+    this.getSchemas();
+  },
   methods: {
+    async getSchemas() {
+      await this.axios
+        .get("https://63e4d8148e1ed4ccf6e75d6c.mockapi.io/schemas")
+        .then(response => {
+          this.schemas = response.data;
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    },
     async poolProvider(ctx) {
       this.isTableBusy = true;
       try {
@@ -147,6 +193,12 @@ export default {
         this.isTableBusy = false;
         return [];
       }
+    },
+    setSchema(file) {
+      this.schema = file;
+    },
+    setData(file) {
+      this.dataFile = file;
     }
   }
 };

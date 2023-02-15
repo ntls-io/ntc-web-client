@@ -18,7 +18,7 @@
 
           <b-col cols="auto">
             <b-button variant="danger" size="sm">
-              <b-icon icon="trash" @click="sFile.clear()"></b-icon>
+              <b-icon icon="trash" @click="removeFile"></b-icon>
             </b-button>
           </b-col>
         </b-row>
@@ -39,7 +39,10 @@ export default {
       accept: "application/json",
       multiple: false,
       startOnSelect: false,
-      extensions: ["json"]
+      extensions: ["json"],
+      onSelect: file => {
+        this.$emit(this.pickerId, file);
+      }
     });
   },
   computed: {
@@ -52,6 +55,10 @@ export default {
   methods: {
     selectFile() {
       this.$upload.select(this.pickerId);
+    },
+    removeFile() {
+      this.$emit(this.pickerId, null);
+      this.sFile.clear();
     }
   },
   beforeDestroy() {
