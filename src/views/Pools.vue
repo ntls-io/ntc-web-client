@@ -200,13 +200,21 @@ export default {
         return [];
       }
     },
-    validateDataSchema() {
+    async validateDataSchema() {
+      const data = await this.readAsText(this.dataFile);
+      const schema = await this.readAsText(this.schemaFile);
       const result = this.validateJsonDataAgainstSchema(
-        this.dataFile,
-        this.schemaFile
+        JSON.parse(data),
+        JSON.parse(schema)
       );
-      console.log(result);
-      return false;
+      if (!result.success) {
+        this.$bvToast.toast(result.error, {
+          title: "Error",
+          variant: "danger",
+          solid: true
+        });
+      }
+      return result.success;
     }
   }
 };
