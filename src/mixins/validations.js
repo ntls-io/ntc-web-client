@@ -1,6 +1,6 @@
 import Ajv from 'ajv';
 
-export const validateMixin = {
+export default {
   methods: {
     validateJsonDataAgainstSchema(data, schema) {
       const ajv = new Ajv();

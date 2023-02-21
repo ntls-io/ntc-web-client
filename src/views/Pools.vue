@@ -1,7 +1,7 @@
 <template>
   <b-container fluid>
     <b-row>
-      <b-col md="4" lg="3">
+      <b-col lg="4" sm="6" cols="12">
         <b-card no-body>
           <form-wizard
             color="#000"
@@ -9,7 +9,7 @@
             title="Create Pool"
             subtitle=" "
           >
-            <tab-content title=" ">
+            <tab-content title=" " :before-change="validateDataSchema">
               <b-form>
                 <b-form-group label="Select Schema Definition">
                   <b-form-select
@@ -28,7 +28,10 @@
                   </b-form-select>
                 </b-form-group>
                 <b-form-group v-if="schema === 'file'">
-                  <FilePicker pickerId="schema-file" @schema-file="setSchema" />
+                  <FilePicker
+                    pickerId="schema-file"
+                    @schema-file="schemaFile = $event"
+                  />
                 </b-form-group>
 
                 <b-form-group v-if="showPreview">
@@ -37,10 +40,10 @@
                   </b-button>
                 </b-form-group>
                 <b-form-group label="Select Data File">
-                  <FilePicker pickerId="pool-file" @pool-file="setData" />
-                </b-form-group>
-                <b-form-group label="Select Wallet">
-                  <b-form-select></b-form-select>
+                  <FilePicker
+                    pickerId="pool-file"
+                    @pool-file="dataFile = $event"
+                  />
                 </b-form-group>
               </b-form>
             </tab-content>
@@ -85,7 +88,7 @@
         </b-card>
       </b-col>
 
-      <b-col>
+      <b-col cols="12">
         <b-card no-body>
           <b-row class="my-3 mx-1">
             <b-col>
@@ -137,12 +140,14 @@
 import FilePicker from "@/components/FilePicker";
 import SchemaPreview from "@/components/SchemaPreview";
 import schemaTemplate from "@/data/patient_genotype_schema.json";
+import validations from "@/mixins/validations";
 
 export default {
   components: {
     SchemaPreview,
     FilePicker
   },
+  mixins: [validations],
   data() {
     return {
       isTableBusy: false,
@@ -155,6 +160,7 @@ export default {
       pools: [],
       dataFile: null,
       schema: null,
+      schemaFile: null,
       schemas: [],
       schemaTemplate: schemaTemplate
     };
@@ -162,7 +168,7 @@ export default {
   computed: {
     showPreview() {
       if (this.schema) {
-        return this.schema === "file" ? !!this.dataFile : true;
+        return this.schema === "file" ? !!this.schemaFile : true;
       }
       return false;
     }
@@ -194,11 +200,13 @@ export default {
         return [];
       }
     },
-    setSchema(file) {
-      this.schema = file;
-    },
-    setData(file) {
-      this.dataFile = file;
+    validateDataSchema() {
+      const result = this.validateJsonDataAgainstSchema(
+        this.dataFile,
+        this.schemaFile
+      );
+      console.log(result);
+      return false;
     }
   }
 };
