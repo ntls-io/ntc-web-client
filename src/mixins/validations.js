@@ -1,9 +1,16 @@
 import Ajv from "ajv";
+const ajv = new Ajv();
 
 export default {
   methods: {
+    async validateSchema(schema) {
+      const validate = await ajv.validateSchema(schema);
+      return {
+        success: validate,
+        error: ajv.errorsText(validate.errors)
+      };
+    },
     validateJsonDataAgainstSchema(data, schema) {
-      const ajv = new Ajv();
       const validate = ajv.compile(schema);
       return {
         success: validate(data),
