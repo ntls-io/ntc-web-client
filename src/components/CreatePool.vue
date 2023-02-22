@@ -1,4 +1,4 @@
-<template lang="">
+<template>
   <div>
     <form-wizard color="#000" step-size="xs" title="Create Pool" subtitle=" ">
       <tab-content title=" " :before-change="validateDataSchema">
@@ -90,11 +90,13 @@
 </template>
 <script>
 import FilePicker from "@/components/FilePicker";
+import SchemaPreview from "@/components/SchemaPreview";
 import schemaTemplate from "@/data/patient_genotype_schema.json";
 import validations from "@/mixins/validations";
 export default {
   components: {
-    FilePicker
+    FilePicker,
+    SchemaPreview
   },
   mixins: [validations],
   data() {
