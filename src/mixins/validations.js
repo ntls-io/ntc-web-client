@@ -7,7 +7,7 @@ export default {
       const validate = await ajv.validateSchema(schema);
       return {
         success: validate,
-        error: ajv.errorsText(validate.errors)
+        error: ajv.errorsText(ajv.errors)
       };
     },
     validateJsonDataAgainstSchema(data, schema) {
