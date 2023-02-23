@@ -40,15 +40,12 @@ export default {
       multiple: false,
       startOnSelect: false,
       extensions: ["json"],
-      onSelect: file => {
-        this.$emit(this.pickerId, file);
-      }
     });
   },
   computed: {
     sFile() {
       const file = this.$upload.file(this.pickerId);
-      console.log(file);
+      this.$emit(this.pickerId, file.$file);
       return file;
     }
   },
@@ -57,7 +54,6 @@ export default {
       this.$upload.select(this.pickerId);
     },
     removeFile() {
-      this.$emit(this.pickerId, null);
       this.sFile.clear();
     }
   },
