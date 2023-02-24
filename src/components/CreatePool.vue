@@ -99,6 +99,12 @@ export default {
     SchemaPreview
   },
   mixins: [validations],
+  props: {
+    schemaList: {
+      type: Array,
+      default: () => []
+    }
+  },
   data() {
     return {
       dataFile: null,
@@ -108,7 +114,6 @@ export default {
         success: null,
         error: null
       },
-      schemaList: [],
       schemaTemplate: schemaTemplate
     };
   },
@@ -120,20 +125,7 @@ export default {
       return false;
     }
   },
-  mounted() {
-    this.getSchemas();
-  },
   methods: {
-    async getSchemas() {
-      await this.axios
-        .get("https://63e4d8148e1ed4ccf6e75d6c.mockapi.io/schemas")
-        .then(response => {
-          this.schemaList = response.data;
-        })
-        .catch(error => {
-          console.log(error);
-        });
-    },
     async validateSchemaFile(file) {
       this.schemaValidation = {
         success: null,
