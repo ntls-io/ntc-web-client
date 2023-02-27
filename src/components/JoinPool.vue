@@ -72,9 +72,14 @@ export default {
   },
   methods: {
     validateDataFile(file) {
-      const result = this.validateJsonDataAgainstSchema(file, this.schemaFile);
-      this.dataValidation = result;
-      return result.success;
+      this.dataFile = file;
+      if (file) {
+        const result = this.validateJsonDataAgainstSchema(
+          file,
+          this.schemaFile
+        );
+        this.dataValidation = result;
+      }
     }
   }
 };
