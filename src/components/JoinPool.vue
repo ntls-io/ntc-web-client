@@ -34,10 +34,14 @@
         </b-form-select>
       </b-form-group>
 
-      <b-form-group label="Select Data File">
+      <b-form-group
+        label="Select Data File"
+        :state="dataValidation.success"
+        :invalid-feedback="dataValidation.error"
+      >
         <FilePicker
-          pickerId="join-pool-data-file"
-          @pool-file="dataFile = $event"
+          pickerId="join-data-file"
+          @join-data-file="validateDataFile($event)"
         />
       </b-form-group>
     </b-form>
@@ -58,8 +62,20 @@ export default {
   data() {
     return {
       dataFile: null,
-      selectedSchema: null
+      dataValidation: {
+        success: null,
+        error: null
+      },
+      selectedSchema: null,
+      schemaFile: null
     };
+  },
+  methods: {
+    validateDataFile(file) {
+      const result = this.validateJsonDataAgainstSchema(file, this.schemaFile);
+      this.dataValidation = result;
+      return result.success;
+    }
   }
 };
 </script>
