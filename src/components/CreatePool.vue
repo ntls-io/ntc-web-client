@@ -139,19 +139,10 @@ export default {
       this.schemaFile = file;
     },
     async validateDataSchema() {
-      const data = await this.readAsText(this.dataFile);
-      const schema = await this.readAsText(this.schemaFile);
       const result = this.validateJsonDataAgainstSchema(
-        JSON.parse(data),
-        JSON.parse(schema)
+        this.dataFile,
+        this.schemaFile
       );
-      if (!result.success) {
-        this.$bvToast.toast(result.error, {
-          title: "Error",
-          variant: "danger",
-          solid: true
-        });
-      }
       return result.success;
     }
   }
