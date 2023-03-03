@@ -2,20 +2,21 @@
   <b-tabs content-class="mt-3">
     <b-tab title="Table" active>
       <b-table
-        :items="[schema.properties]"
+        :items="[schemaItems]"
         responsive
         stacked="sm"
         head-variant="dark"
         caption-top
       >
         <template #table-caption
-          >The schema needs to be an <b>{{ schema.type }}</b>
+          >The schema needs to be an
+          <b class="text-danger text-capitalize">{{ schemaType }}</b>
         </template>
 
         <template #head()="data">
           <small
             class="text-warning"
-            v-if="schema.required.includes(data.label)"
+            v-if="schema.required && schema.required.includes(data.label)"
             >Required
           </small>
           <p class="mb-1">{{ data.label.toUpperCase() }}</p>
@@ -39,9 +40,20 @@
 <script>
 export default {
   props: {
-    schema: {
+    schemaTemplate: {
       type: Object,
       required: true
+    }
+  },
+  computed: {
+    schema() {
+      return this.schemaTemplate.properties || this.schemaTemplate.items;
+    },
+    schemaItems() {
+      return this.schema.properties || this.schema;
+    },
+    schemaType() {
+      return this.schemaTemplate.type || this.schema.type;
     }
   }
 };

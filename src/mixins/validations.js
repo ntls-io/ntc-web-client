@@ -14,10 +14,10 @@ export default {
       const data = await this.readAsText(dataFile);
       const schema = await this.readAsText(schemaFile);
 
-      const validate = ajv.compile(schema);
+      const validate = ajv.compile(JSON.parse(schema));
 
       const result = {
-        success: validate(data),
+        success: validate(JSON.parse(data)),
         error: ajv.errorsText(validate.errors)
       };
 
