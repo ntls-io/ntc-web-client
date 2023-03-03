@@ -10,12 +10,26 @@ export default {
         error: ajv.errorsText(ajv.errors)
       };
     },
-    validateJsonDataAgainstSchema(data, schema) {
+    async validateJsonDataAgainstSchema(dataFile, schemaFile) {
+      const data = await this.readAsText(dataFile);
+      const schema = await this.readAsText(schemaFile);
+
       const validate = ajv.compile(schema);
-      return {
+
+      const result = {
         success: validate(data),
         error: ajv.errorsText(validate.errors)
       };
+
+      if (!result.success) {
+        this.$bvToast.toast(result.error, {
+          title: "Error",
+          variant: "danger",
+          solid: true
+        });
+      }
+
+      return result;
     },
     readAsText(file) {
       return new Promise((resolve, reject) => {

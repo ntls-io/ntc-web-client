@@ -3,7 +3,7 @@
     <b-row>
       <b-col lg="4" sm="6" cols="12">
         <b-card no-body>
-          <CreatePool />
+          <CreatePool :schemaList="schemaList" />
         </b-card>
       </b-col>
 
@@ -36,21 +36,29 @@
               </div>
             </template>
             <template v-slot:cell(actions)>
-              <b-button size="sm" variant="outline-dark">Join Pool </b-button>
+              <b-button size="sm" variant="outline-dark" v-b-modal.join-pool
+                >Join Pool
+              </b-button>
             </template>
           </b-table>
         </b-card>
       </b-col>
     </b-row>
+
+    <b-modal id="join-pool" centered hide-header ok-title="Join This Pool">
+      <JoinPool :schemaList="schemaList" />
+    </b-modal>
   </b-container>
 </template>
 
 <script>
 import CreatePool from "@/components/CreatePool";
+import JoinPool from "@/components/JoinPool";
 
 export default {
   components: {
-    CreatePool
+    CreatePool,
+    JoinPool
   },
   data() {
     return {
@@ -60,10 +68,24 @@ export default {
         "description",
         "digital_rights",
         { key: "actions", label: "" }
-      ]
+      ],
+      schemaList: []
     };
   },
+  mounted() {
+    this.getSchemas();
+  },
   methods: {
+    async getSchemas() {
+      await this.axios
+        .get("https://63e4d8148e1ed4ccf6e75d6c.mockapi.io/schemas")
+        .then(response => {
+          this.schemaList = response.data;
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    },
     async poolProvider(ctx) {
       this.isTableBusy = true;
       try {
