@@ -33,6 +33,12 @@ const routes = [
     component: () => import("@/views/Analysis-data.vue")
   },
   {
+    path: "/packages",
+    name: "packages",
+    meta: { layout: "dashboard" },
+    component: () => import("@/views/Packages.vue")
+  },
+  {
     path: "/pools",
     name: "pools",
     meta: { layout: "dashboard" },

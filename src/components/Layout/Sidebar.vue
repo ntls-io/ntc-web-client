@@ -70,11 +70,16 @@ export default {
         path: "/pools",
         icon: "columns-gap"
       },
-      {
-        name: "Tokens",
-        path: "/tokens",
-        icon: "files"
-      },
+      // {
+      //   name: "My Tokens",
+      //   path: "/tokens",
+      //   icon: "files"
+      // },
+      // {
+      //   name: "Packages",
+      //   path: "/packages",
+      //   icon: "inboxes"
+      // },
       {
         name: "Analysis",
         path: "/analysis",
