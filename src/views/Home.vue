@@ -1,37 +1,33 @@
 <template>
   <b-container fluid>
-    <b-row>
-      <b-col cols="auto">
-        <b-table-simple borderless>
-          <b-tr>
-            <b-td> Available balance </b-td>
-            <b-td>$ALGO 25.00</b-td>
-            <b-td>
-              <b-button-group size="sm">
-                <b-button variant="warning">Withdraw</b-button>
-                <b-button variant="success">Top up</b-button>
-              </b-button-group>
-            </b-td>
-          </b-tr>
-        </b-table-simple>
+    <b-row align-v="center">
+      <b-col lg="4" sm="6" cols="12">
         <b-list-group class="pb-3">
-          <b-list-group-item class="d-flex justify-content-between">
+          <b-list-group-item
+            class="d-flex justify-content-between align-items-center"
+          >
             Data Pool
-            <span>1</span>
+            <b-badge variant="dark">1</b-badge>
           </b-list-group-item>
 
-          <b-list-group-item class="d-flex justify-content-between ">
+          <b-list-group-item
+            class="d-flex justify-content-between  align-items-center"
+          >
             Digital Rights Tokens Sold
-            <span>3</span>
+            <b-badge variant="dark">3</b-badge>
           </b-list-group-item>
 
-          <b-list-group-item class="d-flex justify-content-between">
+          <b-list-group-item
+            class="d-flex justify-content-between  align-items-center"
+          >
             Digital Rights Tokens Purchased
-            <span>1</span>
+            <b-badge variant="dark">1</b-badge>
           </b-list-group-item>
-          <b-list-group-item class="d-flex justify-content-between">
+          <b-list-group-item
+            class="d-flex justify-content-between  align-items-center"
+          >
             Amount Paid Out
-            <span>$20</span>
+            <b-badge variant="dark">$20</b-badge>
           </b-list-group-item>
         </b-list-group>
       </b-col>
