@@ -76,11 +76,6 @@ export default {
         icon: "files"
       },
       {
-        name: "Packages",
-        path: "/packages",
-        icon: "inboxes"
-      },
-      {
         name: "Analysis",
         path: "/analysis",
         icon: "pie-chart"
