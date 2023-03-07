@@ -10,7 +10,7 @@
       >
         <template #table-caption
           >The schema needs to be an
-          <b class="text-danger text-capitalize">{{ schemaType }}</b>
+          <b class="text-danger text-capitalize">{{ schemaTemplate.type }}</b>
         </template>
 
         <template #head()="data">
@@ -51,9 +51,6 @@ export default {
     },
     schemaItems() {
       return this.schema.properties || this.schema;
-    },
-    schemaType() {
-      return this.schemaTemplate.type || this.schema.type;
     }
   }
 };
