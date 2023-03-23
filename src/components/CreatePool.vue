@@ -96,12 +96,13 @@
 import FilePicker from "@/components/FilePicker";
 import SchemaPreview from "@/components/SchemaPreview";
 import validations from "@/mixins/validations";
+import DataService from "@/mixins/DataService"
 export default {
   components: {
     FilePicker,
     SchemaPreview
   },
-  mixins: [validations],
+  mixins: [validations, DataService],
   props: {
     schemaList: {
       type: Array,
@@ -117,7 +118,9 @@ export default {
       schemaValidation: {
         success: null,
         error: null
-      }
+      },
+      nameInput: null,
+      descriptionInput: null
     };
   },
   computed: {
@@ -153,12 +156,26 @@ export default {
       );
       return result.success;
     },
-    createPool() {
-      this.$swal({
+    async createPool() {
+      const uploadSchemaResult = await this.uploadDataSchema('schema-name',JSON.stringify(this.schemaFile));
+      if (uploadSchemaResult.status === 201) {
+        const dataPoolName = document.querySelector('b-form-input[type="text"]').value;
+        const dataPoolDescription = document.querySelector('b-form-textarea').value;
+        const dataPoolCreationResult = await this.uploadDataPool('WalletAddressString',dataPoolName,dataPoolDescription,JSON.stringify(this.dataFile),Object.keys(this.dataFile).length);
+        if (dataPoolCreationResult.status === 201) {
+        this.$swal({
         icon: "success",
         title: "Name of pool",
         text: "Description of pool"
       });
+        }
+      } else {
+        this.$swal({
+        icon: "error",
+        title: "Something went wrong.",
+        text: "Please try again."
+      });
+      };
     }
   }
 };
