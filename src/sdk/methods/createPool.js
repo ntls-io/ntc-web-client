@@ -1,3 +1,6 @@
+// import
+import client from "../client";
+
 require("dotenv").config();
 const fs = require("fs");
 const algosdk = require("algosdk");
@@ -26,24 +29,13 @@ const enclave = algosdk.generateAccount();
 // console.log("mnemonic " + mnemonic);
 // console.log("address " + account1.addr);
 
-console.log();
-// Connect your client
-const algodToken =
-  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
-const baseServer = "http://localhost";
-const port = "4001";
-// const headers = { "X-API-Key": process.env.REACT_APP_API_KEY };
-
-// console.log(process.env);
-const client = new algosdk.Algodv2(algodToken, baseServer, port);
-
 // Read Teal File
 let approvalProgram = "";
 let clearStateProgram = "";
 
 try {
-  approvalProgram = fs.readFileSync("../sdk/approval.teal", "utf8");
-  clearStateProgram = fs.readFileSync("../sdk/clear.teal", "utf8");
+  approvalProgram = fs.readFileSync("../sdk/contract/approval.teal", "utf8");
+  clearStateProgram = fs.readFileSync("../sdk/contract/clear.teal", "utf8");
   console.log(approvalProgram);
   console.log(clearStateProgram);
 } catch (err) {
@@ -51,14 +43,13 @@ try {
 }
 
 // Compile Program
-const compileProgram = async (client, programSource) => {
+const compileContract = async (client, programSource) => {
   const encoder = new TextEncoder();
   const programBytes = encoder.encode(programSource);
   const compileResponse = await client.compile(programBytes).do();
   const compiledBytes = new Uint8Array(
     Buffer.from(compileResponse.result, "base64")
   );
-  // console.log(compileResponse)
   return compiledBytes;
 };
 
@@ -449,9 +440,12 @@ const createApp = async (
 //   }
 // };
 
-const main = async () => {
-  const compiledApprovalProgram = await compileProgram(client, approvalProgram);
-  const compiledClearProgram = await compileProgram(client, clearStateProgram);
+const createPool = async () => {
+  const compiledApprovalProgram = await compileContract(
+    client,
+    approvalProgram
+  );
+  const compiledClearProgram = await compileContract(client, clearStateProgram);
 
   const accountInfo = await client.accountInformation(creatorAddress).do();
   console.log("Account balance: %d microAlgos", accountInfo.amount);
@@ -545,5 +539,5 @@ const main = async () => {
   // clearState(sender, 76641532)
   console.log(appId);
 };
-console.log(main());
+console.log(createPool());
 // return(<div>hello</div>)
