@@ -1,25 +1,37 @@
-// import
-// import client from "./client";
-import createPool from "./methods/createPool";
-
 require("dotenv").config();
-// const fs = require("fs");
-// const algosdk = require("algosdk");
+const algosdk = require("algosdk");
 
-// // get accounts from mnemonic
-// const creatorMnemonic =
-//   "asthma genuine aunt dumb concert solar blast spy monster before sudden census denial hope cost wasp legal system angle soup evolve young guilt able width";
-// // const userMnemonic =
-// //   "hotel hole fox quit trend manage universe name sketch maximum toast normal develop favorite actual bean extra husband casual acquire seminar float moment ability nose";
-// const creatorAccount = algosdk.mnemonicToSecretKey(creatorMnemonic);
-// // const userAccout = algosdk.mnemonicToSecretKey(userMnemonic);
-// const creatorSecret = creatorAccount.sk;
-// const creatorAddress = creatorAccount.addr;
-// // const sender = userAccout.addr;a
-// // Generate Account
-// const enclave = algosdk.generateAccount();
-// const enclavekey = enclave.sk;
-// const mnemonic = algosdk.secretKeyToMnemonic(secretkey);
-// console.log("mnemonic " + mnemonic);
-// console.log("address " + account1.addr);
-createPool();
+const { createDeployContractTxn } = require("./createTransactions/createTxns");
+const { sendDeployContract } = require("./sendTransactions/sendCreateTxns");
+
+// get test accounts from mnemonic
+const creatorMnemonic =
+  "asthma genuine aunt dumb concert solar blast spy monster before sudden census denial hope cost wasp legal system angle soup evolve young guilt able width";
+
+const creatorAccount = algosdk.mnemonicToSecretKey(creatorMnemonic);
+const enclave = algosdk.generateAccount();
+
+// Client setup, get these values from process env files instead
+const algodToken =
+  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+const baseServer = "http://localhost";
+const port = "4001";
+// const headers = { "X-API-Key": process.env.REACT_APP_API_KEY };
+const client = new algosdk.Algodv2(algodToken, baseServer, port);
+
+const testCreateDataPoolMethod = async () => {
+  const txn = await createDeployContractTxn(creatorAccount, enclave, client);
+  console.log(txn);
+  const txId = await txn.txID().toString();
+
+  // Sign the transaction, here we have to intervene
+  const creatorSecret = creatorAccount.sk;
+  const signedTxn = txn.signTxn(creatorSecret);
+  // intervene above with authenticateion
+
+  const txnResult = await sendDeployContract(signedTxn, client, txId);
+
+  console.log(txnResult);
+};
+
+testCreateDataPoolMethod();
