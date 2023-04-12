@@ -70,20 +70,15 @@ export default {
         path: "/pools",
         icon: "columns-gap"
       },
-      // {
-      //   name: "My Tokens",
-      //   path: "/tokens",
-      //   icon: "files"
-      // },
-      // {
-      //   name: "Packages",
-      //   path: "/packages",
-      //   icon: "inboxes"
-      // },
       {
         name: "Analysis",
         path: "/analysis",
         icon: "pie-chart"
+      },
+      {
+        name: "Market",
+        path: "/market",
+        icon: "cart3"
       }
     ]
   })

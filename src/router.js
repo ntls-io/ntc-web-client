@@ -33,10 +33,10 @@ const routes = [
     component: () => import("@/views/Analysis-data.vue")
   },
   {
-    path: "/packages",
-    name: "packages",
+    path: "/market",
+    name: "market",
     meta: { layout: "dashboard" },
-    component: () => import("@/views/Packages.vue")
+    component: () => import("@/views/Market.vue")
   },
   {
     path: "/pools",
